@@ -33,15 +33,6 @@ jobs:
           # Update the version for the swagger-petstore artifact only
           sed -i -E '/<artifactId>swagger-petstore<\/artifactId>/,/<\/version>/ s|<version>[0-9.]*</version>|<version>${{ github.event.inputs.version }}</version>|' pom.xml
 
-      - name: Check if pom.xml was modified
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "Changes detected in pom.xml"
-          else
-            echo "No changes detected in pom.xml"
-            exit 1
-          fi
-
       - name: Commit version change
         run: |
           git add pom.xml
