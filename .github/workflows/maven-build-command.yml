@@ -1,0 +1,15 @@
+# .github/workflows/call-prepare-release.yml
+name: Prepare Release
+
+on:
+  workflow_dispatch:
+    branches: ["master"]
+
+jobs:
+  trigger-prepare-release:
+    uses: ./.github/workflows/reusable-prepare-release.yml
+    with:
+      app_id: ${{ secrets.APP_ID }}
+      private_key: ${{ secrets.APP_PRIVATE_KEY }}
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
